@@ -26,7 +26,7 @@ public class EmployeeController {
             consumes = "application/json"
     )
     public ResponseEntity<EmployeeResponse> saveEmployeesResource(@RequestBody EmployeeRequest employeeRequest){
-        return employeeService.saveEmployees(employeeRequest);
+        return ResponseEntity.accepted().body(employeeService.saveEmployees(employeeRequest));
     }
 
     @GetMapping(
@@ -35,7 +35,7 @@ public class EmployeeController {
             consumes = "application/json"
     )
     public ResponseEntity<EmployeeResponse> getEmployeesWithHighSalaryResource(){
-        return employeeService.getEmployeesWithHighSalary();
+        return ResponseEntity.accepted().body(employeeService.getEmployeesWithHighSalary());
     }
 
 }

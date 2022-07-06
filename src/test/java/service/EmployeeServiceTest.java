@@ -27,7 +27,6 @@ public class EmployeeServiceTest {
     @Mock
     private EmployeeRepo employeeRepo;
 
-    @Autowired
     private EmployeeServiceImpl employeeService;
 
     @BeforeEach
@@ -46,11 +45,10 @@ public class EmployeeServiceTest {
 
         when(employeeRepo.findBySalaryGreaterThan(100L)).thenReturn(employeesResult);
 
-        ResponseEntity<EmployeeResponse> response = employeeService.getEmployeesWithHighSalary();
+        EmployeeResponse response = employeeService.getEmployeesWithHighSalary();
 
         assertThat(response, is(notNullValue()));
-        assertThat(response.getStatusCode(), is(HttpStatus.ACCEPTED));
-        assertThat(response.getBody(), is(expectedResponse));
+        assertThat(response, is(expectedResponse));
     }
 
     @Test
@@ -67,11 +65,10 @@ public class EmployeeServiceTest {
 
         when(employeeRepo.saveAll(request.getEmployees())).thenReturn(employees);
 
-        ResponseEntity<EmployeeResponse> actualResponse = employeeService.saveEmployees(request);
+        EmployeeResponse actualResponse = employeeService.saveEmployees(request);
 
         assertThat(actualResponse, is(notNullValue()));
-        assertThat(actualResponse.getStatusCode(), is(HttpStatus.ACCEPTED));
-        assertThat(actualResponse.getBody(), is(expectedResponse));
+        assertThat(actualResponse, is(expectedResponse));
 
 
     }

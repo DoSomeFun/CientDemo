@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 public interface EmployeeService {
-    ResponseEntity<EmployeeResponse> saveEmployees(EmployeeRequest employeeRequest);
+    EmployeeResponse saveEmployees(EmployeeRequest employeeRequest);
 
-    ResponseEntity<EmployeeResponse> getEmployeesWithHighSalary();
+    EmployeeResponse getEmployeesWithHighSalary();
 }

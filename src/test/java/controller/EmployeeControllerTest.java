@@ -46,7 +46,7 @@ public class EmployeeControllerTest {
         EmployeeResponse expectedResponse = EmployeeResponse.builder().employees(employees).build();
 
         when(employeeService.saveEmployees(request)).
-                thenReturn(ResponseEntity.accepted().body(expectedResponse));
+                thenReturn(expectedResponse);
 
         ResponseEntity<EmployeeResponse> actualResponse = employeeController.saveEmployeesResource(request);
 
@@ -67,7 +67,7 @@ public class EmployeeControllerTest {
         EmployeeResponse expectedResponse = EmployeeResponse.builder().employees(employees).build();
 
         when(employeeService.getEmployeesWithHighSalary()).
-                thenReturn(ResponseEntity.accepted().body(expectedResponse));
+                thenReturn(expectedResponse);
 
         ResponseEntity<EmployeeResponse> actualResponse = employeeController.getEmployeesWithHighSalaryResource();
 

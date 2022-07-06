@@ -21,20 +21,23 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeRepo employeeRepo;
 
     @Override
-    public ResponseEntity<EmployeeResponse> saveEmployees(EmployeeRequest employeeRequest) {
+    public EmployeeResponse saveEmployees(EmployeeRequest employeeRequest) {
 
-        employeeRepo.saveAll(employeeRequest.getEmployees());
+        List<Employee> employees = employeeRepo.saveAll(employeeRequest.getEmployees());
+
+        log.info(String.format("Saving employeeRequest: %s into in memory database(H2)", employeeRequest));
+
         EmployeeResponse employeeResponse = EmployeeResponse.builder().
-                employees(employeeRequest.getEmployees()).
+                employees(employees).
                 build();
 
         log.info(employeeResponse.toString());
 
-        return ResponseEntity.accepted().body(employeeResponse);
+        return employeeResponse;
     }
 
     @Override
-    public ResponseEntity<EmployeeResponse> getEmployeesWithHighSalary() {
+    public EmployeeResponse getEmployeesWithHighSalary() {
 
         List<Employee> employeesAboveHundred = employeeRepo.findBySalaryGreaterThan(100L);
 
@@ -45,6 +48,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         log.info("Employees with salary above 100: " + employeeResponse.toString());
 
-        return ResponseEntity.accepted().body(employeeResponse);
+        return employeeResponse;
     }
 }
