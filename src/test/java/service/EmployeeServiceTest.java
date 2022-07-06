@@ -38,21 +38,13 @@ public class EmployeeServiceTest {
 
     @Test
     public void testGetEmployeesWithHighSalary(){
-        List<Employee> employees = new ArrayList<>();
-        employees.add(Employee.builder().employeeId(1L).firstName("anna").lastName("marie").salary(110L).build());
-        employees.add(Employee.builder().employeeId(2L).firstName("peter").lastName("johns").salary(90L).build());
-        employees.add(Employee.builder().employeeId(1L).firstName("tim").lastName("lewis").salary(100L).build());
-        employees.add(Employee.builder().employeeId(1L).firstName("stephen").lastName("hawkings").salary(130L).build());
-
-
-
         List<Employee> employeesResult = new ArrayList<>();
         employeesResult.add(Employee.builder().employeeId(1L).firstName("anna").lastName("marie").salary(110L).build());
-        employeesResult.add(Employee.builder().employeeId(1L).firstName("stephen").lastName("hawkings").salary(130L).build());
+        employeesResult.add(Employee.builder().employeeId(4L).firstName("stephen").lastName("hawkings").salary(130L).build());
 
         EmployeeResponse expectedResponse = EmployeeResponse.builder().employees(employeesResult).build();
 
-        when(employeeRepo.findAll()).thenReturn(employees);
+        when(employeeRepo.findBySalaryGreaterThan(100L)).thenReturn(employeesResult);
 
         ResponseEntity<EmployeeResponse> response = employeeService.getEmployeesWithHighSalary();
 
@@ -67,8 +59,8 @@ public class EmployeeServiceTest {
         List<Employee> employees = new ArrayList<>();
         employees.add(Employee.builder().employeeId(1L).firstName("anna").lastName("marie").salary(110L).build());
         employees.add(Employee.builder().employeeId(2L).firstName("peter").lastName("johns").salary(90L).build());
-        employees.add(Employee.builder().employeeId(1L).firstName("tim").lastName("lewis").salary(100L).build());
-        employees.add(Employee.builder().employeeId(1L).firstName("stephen").lastName("hawkings").salary(130L).build());
+        employees.add(Employee.builder().employeeId(3L).firstName("tim").lastName("lewis").salary(100L).build());
+        employees.add(Employee.builder().employeeId(4L).firstName("stephen").lastName("hawkings").salary(130L).build());
 
         request.setEmployees(employees);
         EmployeeResponse expectedResponse = EmployeeResponse.builder().employees(employees).build();
